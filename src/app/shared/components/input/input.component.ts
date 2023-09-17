@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
-  selector: 'app-input',
+  selector: 'custom-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
 })
