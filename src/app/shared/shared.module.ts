@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CardComponent } from './components/card/card.component';
 import { InputComponent } from './components/input/input.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -13,7 +14,10 @@ import { LoadingComponent } from './components/loading/loading.component';
     LoadingComponent
   ],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    ReactiveFormsModule
+  ],
+  exports: [CardComponent, InputComponent, LoadingComponent, ReactiveFormsModule],
+
 })
 export class SharedModule { }

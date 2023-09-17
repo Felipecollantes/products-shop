@@ -1,1 +1,3 @@
-<p>home works!</p>
+<form [formGroup]="form">
+  <custom-input [controlName]="'search'" [form]="form" (param)="findByParam($event)"></custom-input>
+</form>
