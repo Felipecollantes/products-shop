@@ -15,9 +15,12 @@ export class ProductImplementationRepository extends ProductRepository {
   constructor(private http: HttpClient) {
     super();
   }
-  getProducts(): Observable<ProductModel> {
+
+  getProductsByTitle(title: string): Observable<ProductModel[]> {
     return this.http
-      .get<ProductEntity>('https://api.escuelajs.co/api/v1/products/4')
-      .pipe(map(this.productMapper.mapFrom));
+      .get<ProductEntity[]>(`https://api.escuelajs.co/api/v1/products/?title=${title}`)
+      .pipe(map((response: ProductEntity[]) => response.map((item) => this.productMapper.mapFrom(item)))) as Observable<
+      ProductModel[]
+    >;
   }
 }
