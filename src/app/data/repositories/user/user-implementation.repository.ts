@@ -21,19 +21,12 @@ export class UserImplementationRepository extends UserRepository {
       })
       .pipe(map(this.userMapper.mapFrom));
   }
-  register(params: {
-    name: string;
-    password: string;
-    email: string;
-    avatar: string;
-  }): Observable<UserModel> {
+  register(params: { name: string; password: string; email: string; avatar: string }): Observable<UserModel> {
     return this.http
       .post<UserEntity>('https://api.escuelajs.co/api/v1/users/', { params })
       .pipe(map(this.userMapper.mapFrom));
   }
   getUserProfile(): Observable<UserModel> {
-    return this.http
-      .get<UserEntity>('https://api.escuelajs.co/api/v1/auth/profile')
-      .pipe(map(this.userMapper.mapFrom));
+    return this.http.get<UserEntity>('https://api.escuelajs.co/api/v1/auth/profile').pipe(map(this.userMapper.mapFrom));
   }
 }

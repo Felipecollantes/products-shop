@@ -5,8 +5,7 @@ import { GetProductsUseCase } from '../domain/product/usecases/get-products.usec
 import { ProductImplementationRepository } from './repositories/product/product-implementation.repository';
 import { HttpClientModule } from '@angular/common/http';
 
-const getProductsUseCaseFactory = (productRepo: ProductRepository) =>
-  new GetProductsUseCase(productRepo);
+const getProductsUseCaseFactory = (productRepo: ProductRepository) => new GetProductsUseCase(productRepo);
 export const getProductsUseCaseProvider = {
   provide: GetProductsUseCase,
   useFactory: getProductsUseCaseFactory,
@@ -14,10 +13,7 @@ export const getProductsUseCaseProvider = {
 };
 
 @NgModule({
-  providers: [
-    getProductsUseCaseProvider,
-    { provide: ProductRepository, useClass: ProductImplementationRepository },
-  ],
+  providers: [getProductsUseCaseProvider, { provide: ProductRepository, useClass: ProductImplementationRepository }],
   declarations: [],
   imports: [CommonModule, HttpClientModule],
 })
