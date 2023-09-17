@@ -10,9 +10,10 @@ import { effects, reducers } from './data/store';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SetHeaderInterceptor } from './core/interceptors/set-headers.interceptor';
+import { HeaderComponent } from './layout/header/header.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, HeaderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
