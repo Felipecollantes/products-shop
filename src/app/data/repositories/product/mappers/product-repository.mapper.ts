@@ -1,4 +1,4 @@
-import { Mapper } from 'src/app/base/mapper';
+import { Mapper } from 'src/app/core/mapper';
 import { ProductEntity } from '../entities/product-entity';
 import { ProductModel } from 'src/app/domain/product/models/product.model';
 

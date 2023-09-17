@@ -11,22 +11,18 @@ import { UserEntity } from './entities/user-entity';
 })
 export class UserImplementationRepository extends UserRepository {
   userMapper = new UserImplementationRepositoryMapper();
+  apiUrl = 'https://api.escuelajs.co/api/v1';
   constructor(private http: HttpClient) {
     super();
   }
   login(params: { email: string; password: string }): Observable<UserModel> {
-    return this.http
-      .post<UserEntity>('https://api.escuelajs.co/api/v1/auth/login', {
-        params,
-      })
-      .pipe(map(this.userMapper.mapFrom));
+    return this.http.post<UserEntity>(`${this.apiUrl}/auth/login`, params).pipe(map(this.userMapper.mapFrom));
   }
   register(params: { name: string; password: string; email: string; avatar: string }): Observable<UserModel> {
-    return this.http
-      .post<UserEntity>('https://api.escuelajs.co/api/v1/users/', { params })
-      .pipe(map(this.userMapper.mapFrom));
+    console.log('params', params);
+    return this.http.post<UserEntity>(`${this.apiUrl}/users/`, params).pipe(map(this.userMapper.mapFrom));
   }
   getUserProfile(): Observable<UserModel> {
-    return this.http.get<UserEntity>('https://api.escuelajs.co/api/v1/auth/profile').pipe(map(this.userMapper.mapFrom));
+    return this.http.get<UserEntity>(`${this.apiUrl}/auth/profile`).pipe(map(this.userMapper.mapFrom));
   }
 }
