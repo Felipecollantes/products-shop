@@ -1,5 +1,12 @@
 import { Observable } from 'rxjs';
 import { ProductModel } from '../models/product.model';
 export abstract class ProductRepository {
-  abstract getProductsByTitle(title: string): Observable<ProductModel[]>;
+  abstract getProductsByParams(params: {
+    title?: string;
+    priceMin?: number;
+    priceMax?: number;
+    categoryId?: number;
+  }): Observable<ProductModel[]>;
+
+  abstract getProductDetails(id: number): Observable<ProductModel>;
 }

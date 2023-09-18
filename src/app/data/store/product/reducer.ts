@@ -6,8 +6,7 @@ export const reducer = createReducer(
   initialState,
 
   on(
-    UserActions.getProducts,
-    //   UserActions.getBeersByParam,
+    UserActions.getProductsByParams,
     (state): ProductState => ({
       ...state,
       loading: true,

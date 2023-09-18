@@ -10,9 +10,9 @@ import { ProductImplementationRepository } from '../../repositories/product/prod
 export class ProductEffects {
   public getBeersByTitle$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
-      ofType(ProductActions.getProducts),
-      mergeMap(({ title }) =>
-        this.productRepository.getProductsByTitle(title).pipe(
+      ofType(ProductActions.getProductsByParams),
+      mergeMap(({ params }) =>
+        this.productRepository.getProductsByParams(params).pipe(
           map((response) => {
             return ProductActions.getProductsSuccess({ response });
           }),
