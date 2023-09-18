@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { RootState } from 'src/app/data/store';
 import * as ProductsActions from '../../data/store/product/actions';
+import * as UserActions from '../../data/store/user/actions';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,12 @@ import * as ProductsActions from '../../data/store/product/actions';
 export class HomeComponent implements OnInit {
   constructor(private store: Store<RootState>) {}
   ngOnInit(): void {
+    this.store.dispatch(
+      UserActions.login({
+        email: 'john@mail.com',
+        password: 'changeme',
+      })
+    );
     this.store.dispatch(
       ProductsActions.getProductsByParams({
         params: {
