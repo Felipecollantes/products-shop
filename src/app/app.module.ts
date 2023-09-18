@@ -8,6 +8,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { effects, reducers } from './data/store';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SetHeaderInterceptor } from './core/interceptors/set-headers.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +20,7 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
     EffectsModule.forRoot(effects),
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: SetHeaderInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
