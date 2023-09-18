@@ -5,6 +5,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { UserModel } from 'src/app/domain/user/models/user.model';
 import { UserEntity } from './entities/user-entity';
+export interface Token {
+  access_token: string;
+  refresh_token: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +19,8 @@ export class UserImplementationRepository extends UserRepository {
   constructor(private http: HttpClient) {
     super();
   }
-  login(params: { email: string; password: string }): Observable<UserModel> {
-    return this.http.post<UserEntity>(`${this.apiUrl}/auth/login`, params).pipe(map(this.userMapper.mapFrom));
+  login(params: { email: string; password: string }): Observable<Token> {
+    return this.http.post<Token>(`${this.apiUrl}/auth/login`, params);
   }
   register(params: { name: string; password: string; email: string; avatar: string }): Observable<UserModel> {
     console.log('params', params);
