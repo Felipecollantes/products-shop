@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DataModule } from './data/data.module';
 import { PATHS } from './core/constants/path.const';
+import { AuthGuard } from './core/guards/auth/auth.guard';
 
 const routes: Routes = [
   {
     path: PATHS.home,
     loadChildren: () => import('./pages/home/home.module').then((m) => m.HomeModule),
-    // canLoad: [LoginGuard],
+    canMatch: [AuthGuard],
   },
   {
     path: PATHS.listProdcuts,
