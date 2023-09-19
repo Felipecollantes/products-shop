@@ -1,3 +1,9 @@
-<form [formGroup]="form">
-  <custom-input [controlName]="'search'" [form]="form" (param)="findByParam($event)"></custom-input>
+<form [formGroup]="form" (ngSubmit)="findByParam()">
+  <custom-input
+    [placeholder]="'title'"
+    [controlName]="'title'"
+    [form]="form"
+    (inputValue)="setTitle($event)"
+  ></custom-input>
+  <custom-button label="Click Me"></custom-button>
 </form>

@@ -1,9 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { RootState } from 'src/app/data/store';
-import * as ProductsActions from '../../data/store/product/actions';
-import * as UserActions from '../../data/store/user/actions';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { PATHS } from 'src/app/core/constants/path.const';
 
 @Component({
   selector: 'app-home',
@@ -11,45 +9,24 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   public form: FormGroup;
+  public inputValue = '';
 
-  constructor(private store: Store<RootState>) {
+  constructor(private router: Router) {
     this.form = new FormGroup({
-      search: new FormControl(''),
+      title: new FormControl(''),
     });
   }
-  ngOnInit(): void {
-    // this.store.dispatch(
-    //   UserActions.login({
-    //     email: 'john@mail.com',
-    //     password: 'changeme',
-    //   })
-    // );
-    // this.store.dispatch(
-    //   ProductsActions.getProductsByParams({
-    //     params: {
-    //       categoryId: 1,
-    //       priceMin: 1,
-    //       priceMax: 10,
-    //     },
-    //     callback() {
-    //       console.log('te miro y te navego');
-    //     },
-    //   })
-    // );
+
+  setTitle(value: string) {
+    this.inputValue = value;
   }
 
-  findByParam(param: string) {
-    return this.store.dispatch(
-      ProductsActions.getProductsByParams({
-        params: {
-          title: param,
-        },
-        callback() {
-          console.log('te miro y te navego');
-        },
-      })
-    );
+  findByParam() {
+    const queryParams = {
+      title: this.inputValue,
+    };
+    this.router.navigate([`/${PATHS.listProdcuts}`], { queryParams: queryParams });
   }
 }
