@@ -7,7 +7,6 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { effects, reducers } from './data/store';
-import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SetHeaderInterceptor } from './core/interceptors/set-headers.interceptor';
 import { HeaderComponent } from './layout/header/header.component';
