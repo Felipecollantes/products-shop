@@ -6,9 +6,6 @@ import { ProductModel } from 'src/app/domain/product/models/product.model';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
-export class CardComponent implements OnChanges {
+export class CardComponent {
   @Input() product = {} as ProductModel;
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes['product']);
-  }
 }
