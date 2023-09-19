@@ -1,11 +1,14 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ProductModel } from 'src/app/domain/product/models/product.model';
 
 @Component({
   selector: 'custom-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  styleUrls: ['./card.component.scss'],
 })
-export class CardComponent {
+export class CardComponent implements OnChanges {
   @Input() product = {} as ProductModel;
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes['product']);
+  }
 }
