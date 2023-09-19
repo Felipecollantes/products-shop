@@ -24,7 +24,7 @@
       [form]="form"
       (inputValue)="setPriceMax($event)"
     ></custom-input>
-    <custom-button label="Click Me"></custom-button>
+    <custom-button label="Search"></custom-button>
   </form>
   <custom-loading *ngIf="loading$ | async"></custom-loading>
   <cdk-virtual-scroll-viewport *ngIf="!(loading$ | async)" [itemSize]="20" class="list-content">

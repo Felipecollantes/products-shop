@@ -15,6 +15,8 @@ import { ProductModel } from 'src/app/domain/product/models/product.model';
 })
 export class ProductDetailComponent implements OnInit {
   public readonly productDetail$: Observable<ProductModel | null> = this.store.select(FromProducts.selectProductDetail);
+  public readonly loading$: Observable<boolean> = this.store.select(FromProducts.selectLoading);
+
   constructor(private route: ActivatedRoute, private store: Store<RootState>) {}
 
   async ngOnInit(): Promise<void> {
