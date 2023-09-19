@@ -110,7 +110,6 @@ export class ListProductsComponent implements OnInit {
     this.inputTitle = value;
   }
   setCategory(value: string) {
-    debugger;
     this.inputCategory = +value;
   }
   setPriceMin(value: string) {
