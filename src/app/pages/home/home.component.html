@@ -1,9 +1,4 @@
 <form [formGroup]="form" (ngSubmit)="findByParam()">
-  <custom-input
-    [placeholder]="'title'"
-    [controlName]="'title'"
-    [form]="form"
-    (inputValue)="setTitle($event)"
-  ></custom-input>
+  <custom-input [placeholder]="'title'" [controlName]="'title'" [form]="form"></custom-input>
   <custom-button label="Click Me"></custom-button>
 </form>

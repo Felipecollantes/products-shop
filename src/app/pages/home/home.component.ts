@@ -19,13 +19,10 @@ export class HomeComponent {
     });
   }
 
-  setTitle(value: string) {
-    this.inputValue = value;
-  }
-
   findByParam() {
+    const { title } = this.form.value;
     const queryParams = {
-      title: this.inputValue,
+      title,
     };
     this.router.navigate([`/${PATHS.listProdcuts}`], { queryParams: queryParams });
   }

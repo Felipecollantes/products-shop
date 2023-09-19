@@ -15,6 +15,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/list-products/list-products.module').then((m) => m.ListProductsModule),
     // canLoad: [LoginGuard],
   },
+  {
+    path: PATHS.login,
+    loadChildren: () => import('./pages/login/login.module').then((m) => m.LoginModule),
+  },
   { path: '', redirectTo: `/${PATHS.home}`, pathMatch: 'full' },
   { path: '**', redirectTo: `/${PATHS.home}`, pathMatch: 'full' },
 ];

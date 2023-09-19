@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { RootState } from 'src/app/data/store';
@@ -21,81 +21,75 @@ interface QueryParams {
   styleUrls: ['./list-products.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ListProductsComponent implements OnInit {
-  public form: FormGroup;
-  public inputTitle: string = '';
-  public inputCategory: number = 0;
-  public inputPriceMin: number = 0;
-  public inputPriceMax: number = 0;
-  public paramTitle: string = '';
-  public paramCategory: number = 0;
-  public paramPriceMin: number = 0;
-  public paramPriceMax: number = 0;
+export class ListProductsComponent {
+  public form = {} as FormGroup;
   public readonly products$: Observable<ProductModel[]> = this.store.select(FromProducts.selectProductsList);
   public readonly loading$: Observable<boolean> = this.store.select(FromProducts.selectLoading);
 
   constructor(private store: Store<RootState>, private router: Router, private activatedRoute: ActivatedRoute) {
-    this.form = new FormGroup({
-      title: new FormControl(''),
-      category: new FormControl(''),
-      priceMin: new FormControl(''),
-      priceMax: new FormControl(''),
-    });
-
-    this.activatedRoute.queryParams.subscribe((params) => {
-      this.paramTitle = params['title'] || '';
-      this.paramCategory = params['categoryId'] || 0;
-      this.paramPriceMin = params['priceMin'] ? +params['priceMin'] : 0;
-      this.paramPriceMax = params['priceMax'] ? +params['priceMax'] : 0;
-      if (this.paramTitle || this.paramCategory || this.paramPriceMin || this.paramPriceMax) {
-        this.findByParam();
-      }
-    });
-  }
-  ngOnInit(): void {
-    this.products$.subscribe((products) => {
-      console.log('Products', products);
-    });
+    this.initForm();
+    this.getParam();
   }
 
   public trackByBeers(_: number, store: ProductModel): number {
     return store.id;
   }
 
+  initForm() {
+    this.form = new FormGroup({
+      title: new FormControl(''),
+      category: new FormControl(''),
+      priceMin: new FormControl(''),
+      priceMax: new FormControl(''),
+    });
+  }
+
+  getParam() {
+    this.activatedRoute.queryParams.subscribe((params) => {
+      const paramTitle = params['title'] || '';
+      const paramcategoryId = params['categoryId'] || '';
+      const paramPriceMin = params['priceMin'] || '';
+      const paramPriceMax = params['priceMax'] || '';
+      if (paramTitle || paramcategoryId || paramPriceMin || paramPriceMax) {
+        this.findByParam(paramTitle, paramcategoryId, paramPriceMin, paramPriceMax);
+      }
+    });
+  }
+
   setParams() {
     const queryParams = {} as QueryParams;
+    const { title, category, priceMin, priceMax } = this.form.value;
+    console.log('form', this.form.value);
 
-    if (this.inputTitle) {
-      queryParams.title = this.inputTitle;
-    }
+    if (title) queryParams.title = title;
 
-    if (this.inputCategory !== 0) {
-      queryParams.categoryId = this.inputCategory;
-    }
+    if (category) queryParams.categoryId = category;
 
-    if (this.inputPriceMin !== 0) {
-      queryParams.priceMin = this.inputPriceMin;
+    if (priceMin && !priceMax) {
+      queryParams.priceMin = priceMin;
       queryParams.priceMax = 9999;
+    } else if (priceMax && !priceMin) {
+      queryParams.priceMax = priceMax;
+      queryParams.priceMin = 1;
+    } else if (priceMax && priceMin) {
+      queryParams.priceMin = priceMin;
+      queryParams.priceMax = priceMax;
     }
 
-    if (this.inputPriceMax !== 0) {
-      queryParams.priceMax = this.inputPriceMax;
-      queryParams.priceMin = 1;
-    }
     this.router.navigate([], {
       relativeTo: this.activatedRoute,
       queryParams: queryParams,
     });
   }
 
-  findByParam() {
+  findByParam(title: string, categoryId: string, priceMin: string, priceMax: string) {
     this.store.dispatch(
       ProductsActions.getProductsByParams({
         params: {
-          title: this.paramTitle,
-          categoryId: this.paramCategory,
-          priceMin: this.paramPriceMin,
-          priceMax: this.paramPriceMax,
+          title,
+          categoryId,
+          priceMin,
+          priceMax,
         },
       })
     );
@@ -104,18 +98,5 @@ export class ListProductsComponent implements OnInit {
   displayDetail(product: ProductModel) {
     console.log('product navigate', product);
     this.router.navigate([`/${PATHS.listProdcuts}/${PATHS.productDetail}`, product.id]);
-  }
-
-  setTitle(value: string) {
-    this.inputTitle = value;
-  }
-  setCategory(value: string) {
-    this.inputCategory = +value;
-  }
-  setPriceMin(value: string) {
-    this.inputPriceMin = +value;
-  }
-  setPriceMax(value: string) {
-    this.inputPriceMax = +value;
   }
 }

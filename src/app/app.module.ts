@@ -10,6 +10,7 @@ import { effects, reducers } from './data/store';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SetHeaderInterceptor } from './core/interceptors/set-headers.interceptor';
 import { HeaderComponent } from './layout/header/header.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],

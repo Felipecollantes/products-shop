@@ -3,9 +3,9 @@ import { ProductModel } from '../models/product.model';
 export abstract class ProductRepository {
   abstract getProductsByParams(params: {
     title?: string;
-    priceMin?: number;
-    priceMax?: number;
-    categoryId?: number;
+    priceMin?: string;
+    priceMax?: string;
+    categoryId?: string;
   }): Observable<ProductModel[]>;
 
   abstract getProductDetails(id: number): Observable<ProductModel>;

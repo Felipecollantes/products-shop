@@ -7,9 +7,9 @@ export class GetProductsUseCase
     UseCase<
       {
         title?: string;
-        priceMin?: number;
-        priceMax?: number;
-        categoryId?: number;
+        priceMin?: string;
+        priceMax?: string;
+        categoryId?: string;
       },
       ProductModel[]
     >
@@ -17,9 +17,9 @@ export class GetProductsUseCase
   constructor(private productRepository: ProductRepository) {}
   execute(params: {
     title?: string;
-    priceMin?: number;
-    priceMax?: number;
-    categoryId?: number;
+    priceMin?: string;
+    priceMax?: string;
+    categoryId?: string;
   }): Observable<ProductModel[]> {
     return this.productRepository.getProductsByParams(params);
   }

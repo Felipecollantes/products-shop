@@ -11,21 +11,8 @@ export class InputComponent {
   @Input() controlName: string = '';
   @Input() form: FormGroup;
   @Input() placeholder: string = '';
-  @Output() inputValue = new EventEmitter<any>();
 
   constructor(private fb: FormBuilder) {
-    // this.form = new FormGroup({
-    //   search: new FormControl(''),
-    // });
-
     this.form = this.fb.group({});
-  }
-
-  onInputChange() {
-    this.inputValue.emit(this.param);
-  }
-
-  get param() {
-    return this.form.controls[this.controlName].value;
   }
 }

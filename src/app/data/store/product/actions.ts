@@ -6,9 +6,9 @@ export const getProductsByParams = createAction(
   props<{
     params: {
       title?: string;
-      priceMin?: number;
-      priceMax?: number;
-      categoryId?: number;
+      priceMin?: string;
+      priceMax?: string;
+      categoryId?: string;
     };
     callback?: () => void;
   }>()

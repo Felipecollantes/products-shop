@@ -24,9 +24,9 @@ export class ProductImplementationRepository extends ProductRepository {
 
   getProductsByParams(params: {
     title?: string;
-    priceMin?: number;
-    priceMax?: number;
-    categoryId?: number;
+    priceMin?: string;
+    priceMax?: string;
+    categoryId?: string;
   }): Observable<ProductModel[]> {
     const apiUrl = this.buildApiUrl(params.title, params.priceMin, params.priceMax, params.categoryId);
     return this.http
@@ -36,7 +36,7 @@ export class ProductImplementationRepository extends ProductRepository {
     >;
   }
 
-  buildApiUrl(title?: string, priceMin?: number, priceMax?: number, categoryId?: number): string {
+  buildApiUrl(title?: string, priceMin?: string, priceMax?: string, categoryId?: string): string {
     let apiUrl = 'https://api.escuelajs.co/api/v1/products/?';
     if (title) apiUrl += `title=${title}&`;
     if (priceMin) apiUrl += `price_min=${priceMin}&`;
