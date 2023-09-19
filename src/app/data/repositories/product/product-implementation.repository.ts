@@ -29,7 +29,6 @@ export class ProductImplementationRepository extends ProductRepository {
     categoryId?: number;
   }): Observable<ProductModel[]> {
     const apiUrl = this.buildApiUrl(params.title, params.priceMin, params.priceMax, params.categoryId);
-
     return this.http
       .get<ProductEntity[]>(apiUrl)
       .pipe(map((response: ProductEntity[]) => response.map((item) => this.productMapper.mapFrom(item)))) as Observable<
@@ -39,7 +38,6 @@ export class ProductImplementationRepository extends ProductRepository {
 
   buildApiUrl(title?: string, priceMin?: number, priceMax?: number, categoryId?: number): string {
     let apiUrl = 'https://api.escuelajs.co/api/v1/products/?';
-
     if (title) apiUrl += `title=${title}&`;
     if (priceMin) apiUrl += `price_min=${priceMin}&`;
     if (priceMax) apiUrl += `price_max=${priceMax}&`;
