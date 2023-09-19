@@ -32,6 +32,7 @@
       <custom-card
         *cdkVirtualFor="let product of products$ | async; trackBy: trackByBeers"
         [product]="product"
+        (click)="displayDetail(product)"
       ></custom-card>
     </div>
   </cdk-virtual-scroll-viewport>

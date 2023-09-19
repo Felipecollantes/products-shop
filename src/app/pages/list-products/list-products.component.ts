@@ -7,6 +7,7 @@ import * as FromProducts from '../../data/store/product/selectors';
 import * as ProductsActions from '../../data/store/product/actions';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PATHS } from 'src/app/core/constants/path.const';
 
 interface QueryParams {
   title: string;
@@ -98,6 +99,11 @@ export class ListProductsComponent implements OnInit {
         },
       })
     );
+  }
+
+  displayDetail(product: ProductModel) {
+    console.log('product navigate', product);
+    this.router.navigate([`/${PATHS.listProdcuts}/${PATHS.productDetail}`, product.id]);
   }
 
   setTitle(value: string) {
