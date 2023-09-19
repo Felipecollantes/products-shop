@@ -5,7 +5,7 @@ import { ListProductsComponent } from './list-products.component';
 
 const routes: Routes = [
   {
-    path: `${PATHS.productDetail}/:id`,
+    path: `${PATHS.productDetail}/:category/:priceMin/:priceMax/:title`,
     loadChildren: () => import('../product-detail/product-detail.module').then((m) => m.ProductDetailModule),
     // canLoad: [AuthGuard],
   },

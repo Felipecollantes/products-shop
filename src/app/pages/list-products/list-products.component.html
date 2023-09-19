@@ -1,1 +1,38 @@
-<p>list-products works!</p>
+<div class="list-container">
+  <form [formGroup]="form" (ngSubmit)="setParams()">
+    <custom-input
+      [placeholder]="'title'"
+      [controlName]="'title'"
+      [form]="form"
+      (inputValue)="setTitle($event)"
+    ></custom-input>
+    <custom-input
+      [placeholder]="'category'"
+      [controlName]="'category'"
+      [form]="form"
+      (inputValue)="setCategory($event)"
+    ></custom-input>
+    <custom-input
+      [placeholder]="'price min'"
+      [controlName]="'priceMin'"
+      [form]="form"
+      (inputValue)="setPriceMin($event)"
+    ></custom-input>
+    <custom-input
+      [placeholder]="'price max'"
+      [controlName]="'priceMax'"
+      [form]="form"
+      (inputValue)="setPriceMax($event)"
+    ></custom-input>
+    <custom-button label="Click Me"></custom-button>
+  </form>
+  <custom-loading *ngIf="loading$ | async"></custom-loading>
+  <cdk-virtual-scroll-viewport *ngIf="!(loading$ | async)" [itemSize]="20" class="list-content">
+    <div class="card-container">
+      <custom-card
+        *cdkVirtualFor="let product of products$ | async; trackBy: trackByBeers"
+        [product]="product"
+      ></custom-card>
+    </div>
+  </cdk-virtual-scroll-viewport>
+</div>
