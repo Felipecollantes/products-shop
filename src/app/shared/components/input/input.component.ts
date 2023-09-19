@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
@@ -10,16 +10,22 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 export class InputComponent {
   @Input() controlName: string = '';
   @Input() form: FormGroup;
-  @Output() param = new EventEmitter<string>();
+  @Input() placeholder: string = '';
+  @Output() inputValue = new EventEmitter<any>();
 
-  constructor() {
-    this.form = new FormGroup({
-      search: new FormControl(''),
-    });
+  constructor(private fb: FormBuilder) {
+    // this.form = new FormGroup({
+    //   search: new FormControl(''),
+    // });
+
+    this.form = this.fb.group({});
   }
-  ngOnInit(): void {
-    this.form.controls['search']?.valueChanges.pipe(debounceTime(500), distinctUntilChanged()).subscribe((response) => {
-      this.param.emit(response);
-    });
+
+  onInputChange() {
+    this.inputValue.emit(this.param);
+  }
+
+  get param() {
+    return this.form.controls[this.controlName].value;
   }
 }
