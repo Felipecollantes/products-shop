@@ -18,20 +18,7 @@ export class ProductDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute, private store: Store<RootState>) {}
 
   async ngOnInit(): Promise<void> {
-    const id = await this.getProductId(this.route);
-    this.store.dispatch(ProductActions.getProductDetail({ id }));
-  }
-
-  async getProductId(route: ActivatedRoute): Promise<number> {
-    return new Promise<number>((resolve, reject) => {
-      route.params.subscribe((params) => {
-        const productId: string = params['id'];
-        if (productId) {
-          resolve(Number(productId));
-        } else {
-          reject('No se pudo obtener el ID del producto');
-        }
-      });
-    });
+    const id = +this.route.snapshot.paramMap.get('id')!;
+    if (id) this.store.dispatch(ProductActions.getProductDetail({ id }));
   }
 }
