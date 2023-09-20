@@ -1,6 +1,13 @@
 <header>
-  <div class="logo">
+  <div class="logo" routerLink="/home">
     <img src="assets/images/shop.png" alt="Icon Shop Products" />
+    <div class="title">Shop Products</div>
   </div>
-  <div class="title">Shop Products</div>
+  <div class="menu">
+    <ul>
+      <li *ngIf="!(user$ | async)"><a routerLink="/login">Login</a></li>
+      <li *ngIf="user$ | async"><a id="logout">Logout</a></li>
+      <li><a routerLink="/admin">Área de Administradores</a></li>
+    </ul>
+  </div>
 </header>
