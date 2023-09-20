@@ -7,7 +7,6 @@ const routes: Routes = [
   {
     path: `${PATHS.productDetail}/:id`,
     loadChildren: () => import('../product-detail/product-detail.module').then((m) => m.ProductDetailModule),
-    // canLoad: [AuthGuard],
   },
   { path: '', component: ListProductsComponent },
 ];

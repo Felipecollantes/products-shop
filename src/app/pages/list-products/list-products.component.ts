@@ -31,7 +31,7 @@ export class ListProductsComponent {
     this.getParam();
   }
 
-  public trackByBeers(_: number, store: ProductModel): number {
+  public trackByProducts(_: number, store: ProductModel): number {
     return store.id;
   }
 
