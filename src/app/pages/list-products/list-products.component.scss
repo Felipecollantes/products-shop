@@ -5,8 +5,12 @@
     gap: 1.25rem;
     padding: 1.25rem;
   }
+  .no-results {
+    display: flex;
+    justify-content: center;
+  }
   .list-content {
-    height: calc(100vh - 66px - 162.67px);
+    height: calc(100vh - 3.75rem - 10.173rem);
   }
   form {
     display: flex;
@@ -20,7 +24,7 @@
       width: 100%;
       display: flex;
       justify-content: center;
-      button{
+      button {
         width: 30%;
       }
     }

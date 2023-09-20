@@ -15,5 +15,6 @@
         (click)="displayDetail(product)"
       ></custom-card>
     </div>
+    <div class="no-results" *ngIf="(products$ | async)?.length === 0">No hay resultados</div>
   </cdk-virtual-scroll-viewport>
 </div>
