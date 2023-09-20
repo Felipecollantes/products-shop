@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { ProductModel } from 'src/app/domain/product/models/product.model';
 
 @Component({
-  selector: 'app-product-detail',
+  selector: 'product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
