@@ -3,6 +3,7 @@
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  width: 100%
 }
 
 .btn-minimalist {
@@ -15,4 +16,9 @@
 
 .btn-minimalist:hover {
   background-color: #ddd;
+}
+
+.disabled-button {
+  opacity: 0.5; 
+  cursor: not-allowed;
 }

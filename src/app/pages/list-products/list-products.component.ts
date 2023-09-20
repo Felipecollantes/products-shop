@@ -5,7 +5,14 @@ import { RootState } from 'src/app/data/store';
 import { ProductModel } from 'src/app/domain/product/models/product.model';
 import * as FromProducts from '../../data/store/product/selectors';
 import * as ProductsActions from '../../data/store/product/actions';
-import { FormControl, FormGroup } from '@angular/forms';
+import {
+  AbstractControl,
+  AsyncValidatorFn,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PATHS } from 'src/app/core/constants/path.const';
 
@@ -26,42 +33,57 @@ export class ListProductsComponent {
   public readonly products$: Observable<ProductModel[]> = this.store.select(FromProducts.selectProductsList);
   public readonly loading$: Observable<boolean> = this.store.select(FromProducts.selectLoading);
 
-  constructor(private store: Store<RootState>, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(
+    private fb: FormBuilder,
+    private store: Store<RootState>,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
     this.initForm();
     this.getParam();
   }
 
-  public trackByProducts(_: number, store: ProductModel): number {
-    return store.id;
-  }
+
 
   initForm() {
-    this.form = new FormGroup({
-      title: new FormControl(''),
-      category: new FormControl(''),
-      priceMin: new FormControl(''),
-      priceMax: new FormControl(''),
-    });
+    this.form = this.fb.group(
+      {
+        title: [''],
+        category: [''],
+        priceMin: [''],
+        priceMax: [''],
+      },
+      {
+        asyncValidators: [this.atLeastOneFieldRequiredValidator()],
+      }
+    );
   }
 
   getParam() {
     this.activatedRoute.queryParams.subscribe((params) => {
-      const paramTitle = params['title'] || '';
-      const paramcategoryId = params['categoryId'] || '';
-      const paramPriceMin = params['priceMin'] || '';
-      const paramPriceMax = params['priceMax'] || '';
-      if (paramTitle || paramcategoryId || paramPriceMin || paramPriceMax) {
-        this.findByParam(paramTitle, paramcategoryId, paramPriceMin, paramPriceMax);
+      const { title, categoryId, priceMin, priceMax } = params;
+      if (title || categoryId || priceMin || priceMax) {
+        this.findByParam(title, categoryId, priceMin, priceMax);
       }
     });
   }
 
   setParams() {
-    const queryParams = {} as QueryParams;
+    if (this.form.valid) {
+      const queryParams = this.buildQueryParams();
+      this.router.navigate([], {
+        relativeTo: this.activatedRoute,
+        queryParams: queryParams,
+      });
+      this.form.reset();
+    }
+  }
+
+  buildQueryParams() {
     const { title, category, priceMin, priceMax } = this.form.value;
+    const queryParams = {} as QueryParams;
 
     if (title) queryParams.title = title;
-
     if (category) queryParams.categoryId = category;
 
     if (priceMin && !priceMax) {
@@ -75,10 +97,23 @@ export class ListProductsComponent {
       queryParams.priceMax = priceMax;
     }
 
-    this.router.navigate([], {
-      relativeTo: this.activatedRoute,
-      queryParams: queryParams,
-    });
+    return queryParams;
+  }
+
+  atLeastOneFieldRequiredValidator(): AsyncValidatorFn {
+    return (control: AbstractControl): Promise<ValidationErrors | null> => {
+      return new Promise((resolve) => {
+        const hasValue = Object.keys(control.value).some(
+          (key) => control.value[key] !== null && control.value[key] !== ''
+        );
+
+        if (hasValue) {
+          resolve(null);
+        } else {
+          resolve({ atLeastOneFieldRequired: true });
+        }
+      });
+    };
   }
 
   findByParam(title: string, categoryId: string, priceMin: string, priceMax: string) {
@@ -96,5 +131,9 @@ export class ListProductsComponent {
 
   displayDetail(product: ProductModel) {
     this.router.navigate([`/${PATHS.listProducts}/${PATHS.productDetail}`, product.id]);
+  }
+
+  public trackByProducts(_: number, store: ProductModel): number {
+    return store.id;
   }
 }
