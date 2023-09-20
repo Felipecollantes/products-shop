@@ -1,3 +1,4 @@
+import { PATHS } from 'src/app/core/constants/path.const';
 import { Component } from '@angular/core';
 import * as FromUser from '../../data/store/user/selectors';
 import { Store } from '@ngrx/store';
@@ -11,6 +12,7 @@ import { RootState } from 'src/app/data/store';
 export class HeaderComponent {
   public user$ = this.store.select(FromUser.selectUser);
   public isMenuOpen: boolean = false;
+  public path = PATHS
 
   constructor(private store: Store<RootState>) {}
 }

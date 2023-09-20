@@ -6,8 +6,9 @@
   <div class="menu">
     <ul>
       <li *ngIf="!(user$ | async)"><a routerLink="/login">Login</a></li>
-      <li *ngIf="user$ | async"><a id="logout">Logout</a></li>
+      <li *ngIf="user$ | async"><a routerLink="/login" id="logout">Logout</a></li>
       <li><a routerLink="/admin">Área de Administradores</a></li>
+      <li><a routerLink="/profile">Área de Cliente</a></li>
     </ul>
   </div>
 </header>

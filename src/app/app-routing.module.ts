@@ -13,7 +13,6 @@ const routes: Routes = [
   {
     path: PATHS.listProducts,
     loadChildren: () => import('./pages/list-products/list-products.module').then((m) => m.ListProductsModule),
-    canMatch: [AuthGuard],
   },
   {
     path: PATHS.login,
@@ -23,6 +22,11 @@ const routes: Routes = [
     path: PATHS.admin,
     loadChildren: () => import('./pages/admin/admin.module').then((m) => m.AdminModule),
     canMatch: [AdminGuard],
+  },
+  {
+    path: PATHS.profile,
+    loadChildren: () => import('./pages/profile/profile.module').then((m) => m.ProfileModule),
+    canMatch: [AuthGuard],
   },
   { path: '', redirectTo: `/${PATHS.home}`, pathMatch: 'full' },
   { path: '**', redirectTo: `/${PATHS.home}`, pathMatch: 'full' },
