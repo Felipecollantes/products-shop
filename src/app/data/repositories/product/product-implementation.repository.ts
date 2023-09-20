@@ -12,14 +12,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProductImplementationRepository extends ProductRepository {
   productMapper = new ProductImplementationRepositoryMapper();
+  apiUrl = 'https://api.escuelajs.co/api/v1/products/';
   constructor(private http: HttpClient) {
     super();
   }
 
   getProductDetails(id: number): Observable<ProductModel> {
-    return this.http
-      .get<ProductEntity>(`https://api.escuelajs.co/api/v1/products/${id}`)
-      .pipe(map(this.productMapper.mapFrom));
+    return this.http.get<ProductEntity>(`${this.apiUrl}${id}`).pipe(map(this.productMapper.mapFrom));
   }
 
   getProductsByParams(params: {
@@ -37,14 +36,14 @@ export class ProductImplementationRepository extends ProductRepository {
   }
 
   buildApiUrl(title?: string, priceMin?: string, priceMax?: string, categoryId?: string): string {
-    let apiUrl = 'https://api.escuelajs.co/api/v1/products/?';
-    if (title) apiUrl += `title=${title}&`;
-    if (priceMin) apiUrl += `price_min=${priceMin}&`;
-    if (priceMax) apiUrl += `price_max=${priceMax}&`;
-    if (categoryId) apiUrl += `categoryId=${categoryId}&`;
+    let url = `${this.apiUrl}?`;
+    if (title) url += `title=${title}&`;
+    if (priceMin) url += `price_min=${priceMin}&`;
+    if (priceMax) url += `price_max=${priceMax}&`;
+    if (categoryId) url += `categoryId=${categoryId}&`;
 
-    if (apiUrl.endsWith('&')) apiUrl = apiUrl.slice(0, -1);
+    if (url.endsWith('&')) url = url.slice(0, -1);
 
-    return apiUrl;
+    return url;
   }
 }
