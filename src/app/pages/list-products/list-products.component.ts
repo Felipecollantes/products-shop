@@ -34,9 +34,7 @@ export class ListProductsComponent {
   public form = {} as FormGroup;
   public readonly products$: Observable<ProductModel[]> = this.store.select(FromProducts.selectProductsList);
   public readonly loading$: Observable<boolean> = this.store.select(FromProducts.selectLoading);
-  public readonly categoryNames$ = this.store.select(FromCategories.selectCategories).pipe(
-    map((categories: CategoryModel[]) => categories.map(category => category.name))
-  );;
+  public readonly category$ = this.store.select(FromCategories.selectCategories);
 
   constructor(
     private fb: FormBuilder,
@@ -47,9 +45,6 @@ export class ListProductsComponent {
     this.initForm();
     this.getParam();
     this.store.dispatch(CategoriesActions.getCategories())
-    this.categoryNames$.subscribe(respo => {
-      console.log('categoies', respo)
-    })
   }
 
 

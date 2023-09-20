@@ -6,10 +6,19 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from './components/button/button.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { SelectorComponent } from './components/selector/selector.component';
 
 @NgModule({
-  declarations: [CardComponent, InputComponent, LoadingComponent, ButtonComponent],
+  declarations: [CardComponent, InputComponent, LoadingComponent, ButtonComponent, SelectorComponent],
   imports: [CommonModule, ReactiveFormsModule, ScrollingModule],
-  exports: [CardComponent, InputComponent, LoadingComponent, ButtonComponent, ReactiveFormsModule, ScrollingModule],
+  exports: [
+    CardComponent,
+    InputComponent,
+    LoadingComponent,
+    ButtonComponent,
+    SelectorComponent,
+    ReactiveFormsModule,
+    ScrollingModule,
+  ],
 })
 export class SharedModule {}
