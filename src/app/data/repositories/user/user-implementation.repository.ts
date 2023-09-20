@@ -2,9 +2,12 @@ import { Injectable } from '@angular/core';
 import { UserRepository } from 'src/app/domain/user/repositories/user.repository';
 import { UserImplementationRepositoryMapper } from './mappers/user-repository.mapper';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { UserModel } from 'src/app/domain/user/models/user.model';
 import { UserEntity } from './entities/user-entity';
+import { Store } from '@ngrx/store';
+import { RootState } from '../../store';
+
 export interface Token {
   access_token: string;
   refresh_token: string;
@@ -16,11 +19,16 @@ export interface Token {
 export class UserImplementationRepository extends UserRepository {
   userMapper = new UserImplementationRepositoryMapper();
   apiUrl = 'https://api.escuelajs.co/api/v1';
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private store: Store<RootState>) {
     super();
   }
   login(params: { email: string; password: string }): Observable<Token> {
     return this.http.post<Token>(`${this.apiUrl}/auth/login`, params);
+  }
+
+  logout() {
+    localStorage.clear();
+    return of(undefined);
   }
   register(params: { name: string; password: string; email: string; avatar: string }): Observable<UserModel> {
     console.log('params', params);

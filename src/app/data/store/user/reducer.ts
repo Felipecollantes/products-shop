@@ -7,10 +7,16 @@ export const reducer = createReducer(
 
   on(
     UserActions.login,
-    UserActions.getUser,
     (state): UserState => ({
       ...state,
       loading: true,
+    })
+  ),
+  on(
+    UserActions.logout,
+    (state): UserState => ({
+      ...state,
+      user: null,
     })
   ),
 
@@ -26,7 +32,6 @@ export const reducer = createReducer(
     return {
       ...state,
       accessToken: accessToken,
-      loading: false,
     };
   }),
 

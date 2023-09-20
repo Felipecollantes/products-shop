@@ -13,3 +13,7 @@ export const loginFailure = createAction('[USER] Login Failure', props<{ loginEr
 export const getUser = createAction('[USER] Get User');
 export const getUserSuccess = createAction('[USER] Get User Success', props<{ user: UserModel }>());
 export const getUserFailure = createAction('[USER] Get User Failure');
+
+export const logout = createAction('[USER] Logout');
+export const logoutSuccess = createAction('[USER] Logout Success');
+export const logoutFailure = createAction('[USER] Logout Failure', props<{ loginError: string }>());
