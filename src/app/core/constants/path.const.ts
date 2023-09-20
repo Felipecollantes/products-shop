@@ -5,4 +5,5 @@ export const PATHS = {
   checkout: 'checkout',
   login: 'login',
   register: 'register',
+  admin: 'admin',
 };
