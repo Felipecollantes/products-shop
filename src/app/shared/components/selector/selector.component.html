@@ -1,4 +1,4 @@
-<div class="search-container" [formGroup]="form">
+<div class="select-container" [formGroup]="form">
   <select [formControlName]="controlName">
     <option *ngFor="let category of category$ | async" [value]="category.id">{{ category.name }}</option>
   </select>

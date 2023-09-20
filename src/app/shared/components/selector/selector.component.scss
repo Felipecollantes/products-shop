@@ -1,18 +1,18 @@
-.custom-input-selector {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .custom-input-selector select {
-    border: 0.125rem solid #333;
-    border-radius: 0.313rem;
-    padding: 0.625em;
-    width: 18.75rem;
-    font-size: 1rem;
-    outline: none;
-  }
-  
-  .custom-input-selector select::placeholder {
-    color: #888;
-  }
-  
+.select-container {
+  display: flex;
+  justify-content: center;
+}
+
+.select-container select {
+  border: 0.125rem solid #333;
+  border-radius: 0.313rem;
+  padding: 0.625em;
+  width: 19.75rem;
+  font-size: 1rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.select-container select::placeholder {
+  color: #888;
+}
