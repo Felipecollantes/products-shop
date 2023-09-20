@@ -1,6 +1,6 @@
 export const PATHS = {
   home: 'home',
-  listProdcuts: 'list-products',
+  listProducts: 'list-products',
   productDetail: 'product-detail',
   checkout: 'checkout',
   login: 'login',

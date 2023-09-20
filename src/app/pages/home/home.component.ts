@@ -24,6 +24,6 @@ export class HomeComponent {
     const queryParams = {
       title,
     };
-    this.router.navigate([`/${PATHS.listProdcuts}`], { queryParams: queryParams });
+    this.router.navigate([`/${PATHS.listProducts}`], { queryParams: queryParams });
   }
 }

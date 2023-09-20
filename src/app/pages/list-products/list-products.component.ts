@@ -97,6 +97,6 @@ export class ListProductsComponent {
 
   displayDetail(product: ProductModel) {
     console.log('product navigate', product);
-    this.router.navigate([`/${PATHS.listProdcuts}/${PATHS.productDetail}`, product.id]);
+    this.router.navigate([`/${PATHS.listProducts}/${PATHS.productDetail}`, product.id]);
   }
 }
