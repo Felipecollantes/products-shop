@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { PATHS } from 'src/app/core/constants/path.const';
 
 @Component({
-  selector: 'app-home',
+  selector: 'home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

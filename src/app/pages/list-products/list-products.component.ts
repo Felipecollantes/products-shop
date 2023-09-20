@@ -16,7 +16,7 @@ interface QueryParams {
   priceMax: number;
 }
 @Component({
-  selector: 'app-list-products',
+  selector: 'list-products',
   templateUrl: './list-products.component.html',
   styleUrls: ['./list-products.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
