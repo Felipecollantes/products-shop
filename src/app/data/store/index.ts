@@ -10,6 +10,7 @@ export interface RootState {
   products: ProductState;
   user: UserState;
 }
+
 export const reducers: ActionReducerMap<RootState> = {
   products: productReducer,
   user: userReducer,
