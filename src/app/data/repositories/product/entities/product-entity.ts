@@ -1,3 +1,5 @@
+import { CategoryEntity } from "../../category/entities/category-entity";
+
 export interface ProductEntity {
   id: number;
   title: string;
@@ -6,13 +8,6 @@ export interface ProductEntity {
   images: string[];
   creationAt: Date;
   updatedAt: Date;
-  category: Category;
+  category: CategoryEntity;
 }
 
-export interface Category {
-  id: number;
-  name: string;
-  image: string;
-  creationAt: Date;
-  updatedAt: Date;
-}

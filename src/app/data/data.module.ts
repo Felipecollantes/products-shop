@@ -4,7 +4,7 @@ import { ProductRepository } from '../domain/product/repositories/product.reposi
 import { GetProductsUseCase } from '../domain/product/usecases/get-products.usecase';
 import { ProductImplementationRepository } from './repositories/product/product-implementation.repository';
 import { HttpClientModule } from '@angular/common/http';
-import { GetProductDetailsUseCase } from '../domain/product/usecases/get-product-details';
+import { GetProductDetailsUseCase } from '../domain/product/usecases/get-product-details.usecase';
 import { UserRepository } from '../domain/user/repositories/user.repository';
 import { UserLoginUseCase } from '../domain/user/usecases/user-login.usecase';
 import { UserLogoutUseCase } from '../domain/user/usecases/user-logout.usecase';

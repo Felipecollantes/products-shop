@@ -1,20 +1,22 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { RootState } from 'src/app/data/store';
 import { ProductModel } from 'src/app/domain/product/models/product.model';
 import * as FromProducts from '../../data/store/product/selectors';
 import * as ProductsActions from '../../data/store/product/actions';
+import * as FromCategories from '../../data/store/category/selectors';
+import * as CategoriesActions from '../../data/store/category/actions';
 import {
   AbstractControl,
   AsyncValidatorFn,
   FormBuilder,
-  FormControl,
   FormGroup,
   ValidationErrors,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PATHS } from 'src/app/core/constants/path.const';
+import { CategoryModel } from 'src/app/domain/category/models/category.mode';
 
 interface QueryParams {
   title: string;
@@ -32,6 +34,9 @@ export class ListProductsComponent {
   public form = {} as FormGroup;
   public readonly products$: Observable<ProductModel[]> = this.store.select(FromProducts.selectProductsList);
   public readonly loading$: Observable<boolean> = this.store.select(FromProducts.selectLoading);
+  public readonly categoryNames$ = this.store.select(FromCategories.selectCategories).pipe(
+    map((categories: CategoryModel[]) => categories.map(category => category.name))
+  );;
 
   constructor(
     private fb: FormBuilder,
@@ -41,6 +46,10 @@ export class ListProductsComponent {
   ) {
     this.initForm();
     this.getParam();
+    this.store.dispatch(CategoriesActions.getCategories())
+    this.categoryNames$.subscribe(respo => {
+      console.log('categoies', respo)
+    })
   }
 
 
