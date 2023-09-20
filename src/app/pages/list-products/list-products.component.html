@@ -10,7 +10,7 @@
   <cdk-virtual-scroll-viewport *ngIf="!(loading$ | async)" [itemSize]="20" class="list-content">
     <div class="card-container">
       <custom-card
-        *cdkVirtualFor="let product of products$ | async; trackBy: trackByBeers"
+        *cdkVirtualFor="let product of products$ | async; trackBy: trackByProducts"
         [product]="product"
         (click)="displayDetail(product)"
       ></custom-card>
