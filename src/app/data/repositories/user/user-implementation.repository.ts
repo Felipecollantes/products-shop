@@ -31,7 +31,6 @@ export class UserImplementationRepository extends UserRepository {
     return of(undefined);
   }
   register(params: { name: string; password: string; email: string; avatar: string }): Observable<UserModel> {
-    console.log('params', params);
     return this.http.post<UserEntity>(`${this.apiUrl}/users/`, params).pipe(map(this.userMapper.mapFrom));
   }
   getUserProfile(): Observable<UserModel> {

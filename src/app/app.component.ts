@@ -13,7 +13,6 @@ export class AppComponent implements OnInit {
 
   constructor(private store: Store<RootState>) {
     const user = JSON.parse(`${localStorage.getItem('user')}`);
-    console.log('user', user);
     if (user) this.store.dispatch(UserActions.setUser({ user }));
   }
   ngOnInit(): void {}

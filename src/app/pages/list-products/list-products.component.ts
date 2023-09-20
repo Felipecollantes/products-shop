@@ -59,7 +59,6 @@ export class ListProductsComponent {
   setParams() {
     const queryParams = {} as QueryParams;
     const { title, category, priceMin, priceMax } = this.form.value;
-    console.log('form', this.form.value);
 
     if (title) queryParams.title = title;
 
@@ -96,7 +95,6 @@ export class ListProductsComponent {
   }
 
   displayDetail(product: ProductModel) {
-    console.log('product navigate', product);
     this.router.navigate([`/${PATHS.listProducts}/${PATHS.productDetail}`, product.id]);
   }
 }

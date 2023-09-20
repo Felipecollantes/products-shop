@@ -4,7 +4,6 @@ import { PATHS } from '../../constants/path.const';
 import { inject } from '@angular/core';
 
 export const AuthGuard: CanActivateFn = (): boolean => {
-  console.log('Auth guard');
   const authService: AuthService = inject(AuthService);
   const router: Router = inject(Router);
   if (!authService.isAuthenticated()) {
