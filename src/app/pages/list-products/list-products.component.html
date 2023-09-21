@@ -1,9 +1,7 @@
 <div class="list-container">
   <form [formGroup]="form" (ngSubmit)="setParams()">
     <custom-input [placeholder]="'title'" [controlName]="'title'" [form]="form"></custom-input>
-    <!-- <custom-input [placeholder]="'category'" [controlName]="'category'" [form]="form"></custom-input> -->
     <custom-selector [controlName]="'category'" [form]="form" [category$]="category$"></custom-selector>
-
     <custom-input [placeholder]="'price min'" [controlName]="'priceMin'" [form]="form"></custom-input>
     <custom-input [placeholder]="'price max'" [controlName]="'priceMax'" [form]="form"></custom-input>
     <custom-button [label]="'Search'" [type]="'submit'" [isDisabled]="form.invalid"></custom-button>
