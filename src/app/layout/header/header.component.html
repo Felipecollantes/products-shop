@@ -7,10 +7,10 @@
     <ul>
       <li *ngIf="!(user$ | async)"><a [routerLink]="path.login">Login</a></li>
       <li *ngIf="user$ | async"><a [routerLink]="path.login" id="logout">Logout</a></li>
-      <li *ngIf="(user$ | async) && (user$ | async)!.role === 'admin'">
+      <li *ngIf="(user$ | async) && (role$ | async) === role.ADMIN">
         <a [routerLink]="path.admin">Área de Administradores</a>
       </li>
-      <li *ngIf="(user$ | async) && ((user$ | async)!.role === 'customer' || (user$ | async)!.role === 'admin')">
+      <li *ngIf="(user$ | async) && ((role$ | async) === role.CUSTOMER || (role$ | async) === role.ADMIN)">
         <a [routerLink]="path.profile">Área de Cliente</a>
       </li>
     </ul>
