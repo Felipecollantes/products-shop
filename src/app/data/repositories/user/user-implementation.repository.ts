@@ -5,8 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, map, of } from 'rxjs';
 import { UserModel } from 'src/app/domain/user/models/user.model';
 import { UserEntity } from './entities/user-entity';
-import { Store } from '@ngrx/store';
-import { RootState } from '../../store';
 
 export interface Token {
   access_token: string;
@@ -19,7 +17,7 @@ export interface Token {
 export class UserImplementationRepository extends UserRepository {
   userMapper = new UserImplementationRepositoryMapper();
   apiUrl = 'https://api.escuelajs.co/api/v1';
-  constructor(private http: HttpClient, private store: Store<RootState>) {
+  constructor(private http: HttpClient) {
     super();
   }
   login(params: { email: string; password: string }): Observable<Token> {

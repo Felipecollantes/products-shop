@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
-import { Observable, forkJoin, of } from 'rxjs';
-import { catchError, filter, map, mergeMap, tap, toArray } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import * as UserActions from './actions';
-import * as FromUser from './selectors';
 import { RootState } from '..';
 import { UserImplementationRepository } from '../../repositories/user/user-implementation.repository';
 
@@ -35,18 +34,18 @@ export class UserEffects {
   );
 
   public logout$: Observable<Action> = createEffect(() =>
-  this.actions$.pipe(
-    ofType(UserActions.logout),
-    mergeMap(() =>
-      this.userRepository.logout().pipe(
-        map((response) => {
-          return UserActions.logoutSuccess();
-        }),
-        catchError((error) => of(UserActions.logoutFailure({ loginError: error })))
+    this.actions$.pipe(
+      ofType(UserActions.logout),
+      mergeMap(() =>
+        this.userRepository.logout().pipe(
+          map((response) => {
+            return UserActions.logoutSuccess();
+          }),
+          catchError((error) => of(UserActions.logoutFailure({ loginError: error })))
+        )
       )
     )
-  )
-);
+  );
 
   constructor(
     private store: Store<RootState>,

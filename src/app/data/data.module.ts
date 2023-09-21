@@ -11,6 +11,8 @@ import { UserLogoutUseCase } from '../domain/user/usecases/user-logout.usecase';
 import { UserRegisterUseCase } from '../domain/user/usecases/user-register.usecase';
 import { UserImplementationRepository } from './repositories/user/user-implementation.repository';
 import { GetUserProfileUseCase } from '../domain/user/usecases/get-user-profile.usecase';
+import { GetCategoriesUseCase } from '../domain/category/usecases/get-categories.usecase';
+import { CategoryRepository } from '../domain/category/repositories/category.repository';
 
 const getProductsUseCaseFactory = (productRepo: ProductRepository) => new GetProductsUseCase(productRepo);
 export const getProductsUseCaseProvider = {
@@ -54,6 +56,13 @@ export const getProfileUserUseCaseProvider = {
   deps: [UserRepository],
 };
 
+const getCategoriesUseCaseFactory = (categoryRepo: CategoryRepository) => new GetCategoriesUseCase(categoryRepo);
+export const getCategoriesUseCaseProvider = {
+  provide: GetCategoriesUseCase,
+  useFactory: getCategoriesUseCaseFactory,
+  deps: [CategoryRepository],
+};
+
 @NgModule({
   providers: [
     getProductsUseCaseProvider,
@@ -62,6 +71,7 @@ export const getProfileUserUseCaseProvider = {
     getUserLogoutUseCaseProvider,
     registerUserUseCaseProvider,
     getProfileUserUseCaseProvider,
+    getCategoriesUseCaseProvider,
     { provide: ProductRepository, useClass: ProductImplementationRepository },
     { provide: UserRepository, useClass: UserImplementationRepository },
   ],

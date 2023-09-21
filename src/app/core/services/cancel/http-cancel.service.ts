@@ -8,8 +8,6 @@ export class HttpCancelService {
   private pendingHTTPRequests$ = new Subject<void>();
 
   constructor() {}
-
-  // Cancel Pending HTTP calls
   public cancelPendingRequests() {
     this.pendingHTTPRequests$.next();
   }

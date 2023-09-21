@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Action, Store } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { catchError, filter, map, mergeMap, tap, toArray } from 'rxjs/operators';
+import { catchError, filter, map, mergeMap, tap } from 'rxjs/operators';
 import * as ProductActions from './actions';
-import * as FromProducts from './selectors';
 import { ProductImplementationRepository } from '../../repositories/product/product-implementation.repository';
-import { RootState } from '..';
 
 @Injectable()
 export class ProductEffects {
@@ -52,9 +50,5 @@ export class ProductEffects {
     )
   );
 
-  constructor(
-    private store: Store<RootState>,
-    private readonly actions$: Actions,
-    private productRepository: ProductImplementationRepository
-  ) {}
+  constructor(private readonly actions$: Actions, private productRepository: ProductImplementationRepository) {}
 }
