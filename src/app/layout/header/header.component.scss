@@ -1,11 +1,10 @@
-
 header {
   background-color: #333;
   color: #fff;
   display: flex;
   align-items: center;
   padding: 0.625em;
-  justify-content: space-between; 
+  justify-content: space-between;
 
   .logo {
     display: flex;
@@ -16,7 +15,6 @@ header {
       max-height: 2.5rem;
       margin-right: 0.625rem;
     }
- 
   }
 
   .title {
@@ -43,7 +41,7 @@ header {
             text-decoration: underline;
           }
         }
-        #logout{
+        #logout {
           color: red;
           cursor: pointer;
         }
@@ -52,7 +50,7 @@ header {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 48rem) {
   header {
     flex-direction: column;
 
@@ -62,7 +60,7 @@ header {
 
     .menu {
       ul {
-        flex-direction: column; 
+        flex-direction: column;
 
         li {
           margin: 0;
